@@ -15,12 +15,12 @@ function helloLog(req, res) {
 }
 
 function wonderWoman(req,res){
-    res.writeHead(200, {"Content-Type": "text/html"});
-    res.writehead("<h1>Menu</h1>");
-    res.writeHead("<p>Thassya de Souza Abreu</p>");
-    res.writeHead("<p>200876005</p>");
-    res.writeHead("<p>thayowisky@gmail.com</p>");
-    res.writeHead("<p>Sistemas de Informação</p>");
+    res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});
+    res.write("<h1>Sobre Mim</h1>");
+    res.write("<p>Thassya de Souza Abreu</p>");
+    res.write("<p>200876005</p>");
+    res.write("<p>thayowisky@gmail.com</p>");
+    res.write("<p>Sistemas de Informação</p>");
     res.end();
 }
 
