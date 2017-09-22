@@ -4,5 +4,6 @@ var requestHandlers = require("./requestHandlers");
 
 var handlers = {};
 handlers['/'] = requestHandlers.helloLog;
+handlers['/index.html'] = requestHandlers.helloLog;
 
 server.start(router,handlers);

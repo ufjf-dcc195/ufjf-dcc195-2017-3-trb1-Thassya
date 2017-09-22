@@ -7,6 +7,7 @@ function start(router, handlers){
     console.log("Requisição recebida em"+(new Date()), "no caminho ", urlParsed.pathname);
     router.route(urlParsed.pathname, handlers, req, res);
   }).listen(3000);
+  console.log("Servidor rodando em http://localhost:3000");
 }
 
 module.exports.start = start;
