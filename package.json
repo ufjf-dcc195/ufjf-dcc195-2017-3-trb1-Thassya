@@ -1,0 +1,20 @@
+{
+  "name": "tbr1_thassya",
+  "version": "1.0.0",
+  "description": "trabalho realizado na disciplina dcc195 - Laboratorio de Sistemas Web III.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ufjf-dcc195/ufjf-dcc195-2017-3-trb1-Thassya.git"
+  },
+  "author": "Thassya",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ufjf-dcc195/ufjf-dcc195-2017-3-trb1-Thassya/issues"
+  },
+  "homepage": "https://github.com/ufjf-dcc195/ufjf-dcc195-2017-3-trb1-Thassya#readme",
+  "dependencies": {}
+}
