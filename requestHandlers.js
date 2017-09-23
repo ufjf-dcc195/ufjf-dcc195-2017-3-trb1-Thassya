@@ -11,12 +11,12 @@ function naoEncontrado(req, res) {
 function helloLog(req, res) {
     res.writeHead(200, { "Content-Type": "text/html;charset=utf-8" });
     res.write("<h1>Menu</h1>");
-    res.write('<ol>');
-    res.write('<li><a href="/sobre.html">Sobre</a></li>');
-    res.write('<li><a href="/aleatorios.html">Aleatórios</a></li>');
-    res.write('<li><a href="/primos.html?n1=1&n2=10">Primos</a></li>');
-    res.write('<li><a href="/equacao.html">Equação</a></li>');
-    res.write('<li><a href="/xadrez.html">Xadrez</a></li>');
+    res.write('<ol style="margin: 20px;">');
+    res.write('<li style="list-style-type: decimal-leading-zero;padding: 5px;"><a href="/sobre.html">Sobre</a></li>');
+    res.write('<li style="list-style-type: decimal-leading-zero;padding: 5px;"><a href="/aleatorios.html">Aleatórios</a></li>');
+    res.write('<li style="list-style-type: decimal-leading-zero;padding: 5px;"><a href="/primos.html?n1=1&n2=10">Primos</a></li>');
+    res.write('<li style="list-style-type: decimal-leading-zero;padding: 5px;"><a href="/equacao.html">Equação</a></li>');
+    res.write('<li style="list-style-type: decimal-leading-zero;padding: 5px;"><a href="/xadrez.html">Xadrez</a></li>');
     res.write('</ol>');
     res.end();
 }
