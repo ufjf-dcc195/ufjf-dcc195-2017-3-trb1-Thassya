@@ -72,7 +72,7 @@ function numerosPrimos(req, res) {
 
     var endereco = req.url;
     var query = url.parse(endereco, true).query;
-    
+
     var n1 = query.n1;
     var n2 = query.n2;
 
@@ -97,55 +97,61 @@ function numerosPrimos(req, res) {
     res.end();
 }
 
-function equacaoSegundoGrau(req,res){
-    if(req.method=="GET"){
+function equacaoSegundoGrau(req, res) {
+    if (req.method == "GET") {
         res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
         res.write("<h1>Termos da equação de segundo grau</h1>");
         res.write("<form method=post>");
-        res.write("<input type=text name=a />");
-        res.write("<input type=text name=b />");
-        res.write("<input type=text name=c />");
-        
+        res.write("<label>Termo a: </label>");
+        res.write("<input type=text name=a /><br />");
+        res.write("<label>Termo b: </label>");
+        res.write("<input type=text name=b /><br />");
+        res.write("<label>Termo c: </label>");
+        res.write("<input type=text name=c /><br />");
+        res.write("<input type=submit />");
         res.write("</form>");
         res.end();
     }
     else {
         var body = "";
-        req.on("data", function(data){
-            console.log(data);
-            body+= data;
-        });
-        req.on('end', function(){
-            var dados = qs.parse(body);
-        })
-    }
-}
-
-function exemplo(req, res) {
-    if (req.method == "GET") {
-        res.writeHead(200, { "Content-Type": "text/html" });
-        res.write("<h1>Digite a senha?</h1>");
-        res.write("<form method=post>");
-        res.write("<input type=text name=senha />");
-        res.write("<input type=submit />");
-        res.write("</form>");
-        res.end();
-    } else {
-        var body = '';
-        req.on('data', function (data) {
+        req.on("data", function (data) {
             body += data;
+            console.log(body);
         });
         req.on('end', function () {
             var dados = qs.parse(body);
-            console.log(dados);
-            res.writeHead(200, { "Content-Type": "text/html" });
-            if (dados.senha == "54321") { res.write("<h1>Acertou!</h1>"); }
-            else {
-                res.write("<p> Não autorizado!</p>");
+            var a = dados.a;
+            var b = dados.b;
+            var c = dados.c;
+            console.log("a: " + a + ", b: " + b + ", c: " + c);
+
+            res.writeHead(200, { "Content-Type": "text/html;" });
+            res.write("<h1>Termos da equação de segundo grau</h1>");
+            res.write("<h2>Calculando (" + a + ")x² + (" + b + ")x + (" + c + ")</h2>");
+            if (a == null || b == null || c == null) {
+                res.write("Números ausentes");
             }
+            else {
+
+                var delta = Math.pow(b, 2) - 4 * a * c;
+                if (delta < 0) {
+                    res.write("<h3> Não existem raizes reais! </h3>");
+                } 
+                // else if (delta == 0) {
+                //     var res = -(b) / (2 * a);
+                //     res.write("<h3> As duas raizes são iguais e valem: " + res + "</h3>");
+                // }
+                else {
+                    var raiz = Math.sqrt(delta);
+                    var x1 = (-(b) - raiz) / (2 * a);
+                    var x2 = (-(b) + raiz) / (2 * a);
+                    res.write("<h3> x1 = " + x1 + " e <br /> x2 = " + x2 + "</h3>");
+                }
+
+            }
+
             res.end();
         })
-
     }
 }
 
