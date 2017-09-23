@@ -16,8 +16,8 @@ function helloLog(req, res) {
     res.write('<li><a href="/aleatorios.html">Aleatórios</a></li>');
     res.write('<li><a href="/primos.html?n1=1&n2=10">Primos</a></li>');
     res.write('<li><a href="/equacao.html">Equação</a></li>');
-    res.write('');
-    res.write('</0l>');
+    res.write('<li><a href="/xadrez.html">Xadrez</a></li>');
+    res.write('</ol>');
     res.end();
 }
 
@@ -155,9 +155,14 @@ function equacaoSegundoGrau(req, res) {
     }
 }
 
+function tabuleiroXadrez(req,res){
+
+}
+
 exports.naoEncontrado = naoEncontrado;
 exports.helloLog = helloLog;
 exports.sobre = wonderWoman;
 exports.aleatorios = numerosAleatorios;
 exports.primos = numerosPrimos;
 exports.equacao = equacaoSegundoGrau;
+exports.xadrez = tabuleiroXadrez;
