@@ -136,7 +136,7 @@ function equacaoSegundoGrau(req, res) {
                 var delta = Math.pow(b, 2) - 4 * a * c;
                 if (delta < 0) {
                     res.write("<h3> Não existem raizes reais! </h3>");
-                } 
+                }
                 // else if (delta == 0) {
                 //     var res = -(b) / (2 * a);
                 //     res.write("<h3> As duas raizes são iguais e valem: " + res + "</h3>");
@@ -155,8 +155,24 @@ function equacaoSegundoGrau(req, res) {
     }
 }
 
-function tabuleiroXadrez(req,res){
-
+function tabuleiroXadrez(req, res) {
+    res.writeHead(200, { "Content-Type": "text/html;charset=utf-8" });
+    res.write("<h1>Tablueiro de Xadrez</h1>");
+    res.write("<br/><br/><table style='border-collapse: collapse; padding: 0;border: 1px solid #000;margin-left: 50px;'>");
+    for(var i = 0;i<8;i++){
+        res.write("<tr>");
+        for(var j = 0; j < 8; j++){
+            if(i%2==j%2){
+                res.write("<td style='height: 50px; width: 50px; background-color: #fff' id=" + i + j + "></td>");
+            }
+            else{
+                res.write("<td style='height: 50px; width: 50px; background-color: #333' id=" + i + j + "></td>");
+            }
+        }
+        res.write("</tr>");
+    }
+    res.write("</table>");
+    res.end();
 }
 
 exports.naoEncontrado = naoEncontrado;
