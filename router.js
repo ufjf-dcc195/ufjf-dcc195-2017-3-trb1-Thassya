@@ -4,7 +4,7 @@ function route(pathname, handlers, req, res) {
       handlers[pathname](req, res);
     }else{
       console.log("Requisição inválida em ", pathname);
-      //handlers["/notfound"](req, res);
+      handlers["/404"](req, res);
     }
   }
   
