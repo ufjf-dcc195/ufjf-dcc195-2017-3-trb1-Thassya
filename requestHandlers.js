@@ -115,14 +115,14 @@ function equacaoSegundoGrau(req, res) {
     else {
         var body = "";
         req.on("data", function (data) {
-            body += data;          
+            body += data;
         });
         req.on('end', function () {
             var dados = qs.parse(body);
             var a = dados.a;
             var b = dados.b;
             var c = dados.c;
-        
+
             res.writeHead(200, { "Content-Type": "text/html;" });
             res.write("<h1>Termos da equação de segundo grau</h1>");
             res.write("<h2>Calculando (" + a + ")x² + (" + b + ")x + (" + c + ")</h2>");
@@ -155,28 +155,37 @@ function equacaoSegundoGrau(req, res) {
 
 function tabuleiroXadrez(req, res) {
     //cavalo: &#9816
-    var body = "";
-    req.on("data", function (data) {
-        body += data;          
-    });
 
     res.writeHead(200, { "Content-Type": "text/html;charset=utf-8" });
     res.write("<h1>Tablueiro de Xadrez</h1>");
     res.write("<br/><br/><table style='border-collapse: collapse; padding: 0;border: 1px solid #000;margin-left: 50px;'>");
-    for(var i = 0;i<8;i++){
+    for (var i = 0; i < 8; i++) {
         res.write("<tr>");
-        for(var j = 0; j < 8; j++){
-            if(i%2==j%2){
+        for (var j = 0; j < 8; j++) {
+            if (i % 2 == j % 2) {
                 res.write("<td style='font-size: 3em; height: 50px; width: 50px; background-color: #fff' id=" + i + j + "></td>");
             }
-            else{
+            else {
                 res.write("<td style='font-size: 3em; height: 50px; width: 50px; background-color: #333; color: #FFF;' id=" + i + j + "></td>");
             }
         }
         res.write("</tr>");
     }
     res.write("</table>");
+
+    var endereco = req.url;
+    var query = url.parse(endereco, true).query;
+    console.log(query);
+    if (!isEmptyObject(query)) {
+        var i = query.i;
+        var j = query.j;
+        console.log("i: " + i + ", j: " + j);
+    }
     res.end();
+}
+
+function isEmptyObject(obj) {
+    return !Object.keys(obj).length;
 }
 
 exports.naoEncontrado = naoEncontrado;
