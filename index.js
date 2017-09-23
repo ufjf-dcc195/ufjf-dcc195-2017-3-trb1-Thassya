@@ -9,7 +9,8 @@ handlers['/index.html'] = requestHandlers.helloLog;
 handlers['/404'] = requestHandlers.naoEncontrado;
 handlers['/sobre.html'] = requestHandlers.sobre;
 handlers['/aleatorios.html'] = requestHandlers.aleatorios;
-handlers['/primos.html'] = requestHandlers.primos;
+handlers['/primos.html'] = requestHandlers.primos; 
+handlers['/equacao.html'] = requestHandlers.equacao;
 
 
 server.start(router,handlers);

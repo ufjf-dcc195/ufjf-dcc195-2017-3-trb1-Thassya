@@ -15,7 +15,7 @@ function helloLog(req, res) {
     res.write('<li><a href="/sobre.html">Sobre</a></li>');
     res.write('<li><a href="/aleatorios.html">Aleatórios</a></li>');
     res.write('<li><a href="/primos.html?n1=1&n2=10">Primos</a></li>');
-    res.write('');
+    res.write('<li><a href="/equacao.html">Equação</a></li>');
     res.write('');
     res.write('</0l>');
     res.end();
@@ -97,6 +97,29 @@ function numerosPrimos(req, res) {
     res.end();
 }
 
+function equacaoSegundoGrau(req,res){
+    if(req.method=="GET"){
+        res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+        res.write("<h1>Termos da equação de segundo grau</h1>");
+        res.write("<form method=post>");
+        res.write("<input type=text name=a />");
+        res.write("<input type=text name=b />");
+        res.write("<input type=text name=c />");
+        
+        res.write("</form>");
+        res.end();
+    }
+    else {
+        var body = "";
+        req.on("data", function(data){
+            console.log(data);
+            body+= data;
+        });
+        req.on('end', function(){
+            var dados = qs.parse(body);
+        })
+    }
+}
 
 function exemplo(req, res) {
     if (req.method == "GET") {
@@ -131,3 +154,4 @@ exports.helloLog = helloLog;
 exports.sobre = wonderWoman;
 exports.aleatorios = numerosAleatorios;
 exports.primos = numerosPrimos;
+exports.equacao = equacaoSegundoGrau;
