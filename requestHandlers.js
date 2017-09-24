@@ -9,26 +9,17 @@ function naoEncontrado(req, res) {
 }
 
 function helloLog(req, res) {
-    res.writeHead(200, { "Content-Type": "text/html;charset=utf-8" });
-    res.write("<h1>Menu</h1>");
-    res.write('<ol style="margin: 20px;">');
-    res.write('<li style="list-style-type: decimal-leading-zero;padding: 5px;"><a href="/sobre.html">Sobre</a></li>');
-    res.write('<li style="list-style-type: decimal-leading-zero;padding: 5px;"><a href="/aleatorios.html">Aleatórios</a></li>');
-    res.write('<li style="list-style-type: decimal-leading-zero;padding: 5px;"><a href="/primos.html?n1=1&n2=10">Primos</a></li>');
-    res.write('<li style="list-style-type: decimal-leading-zero;padding: 5px;"><a href="/equacao.html">Equação</a></li>');
-    res.write('<li style="list-style-type: decimal-leading-zero;padding: 5px;"><a href="/xadrez.html">Xadrez</a></li>');
-    res.write('</ol>');
-    res.end();
+
 }
 
 function wonderWoman(req, res) {
-    res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
-    res.write("<h1>Sobre Mim</h1>");
-    res.write("<p>Thassya de Souza Abreu</p>");
-    res.write("<p>200876005</p>");
-    res.write("<p>thayowisky@gmail.com</p>");
-    res.write("<p>Sistemas de Informação</p>");
-    res.end();
+    // res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+    // res.write("<h1>Sobre Mim</h1>");
+    // res.write("<p>Thassya de Souza Abreu</p>");
+    // res.write("<p>200876005</p>");
+    // res.write("<p>thayowisky@gmail.com</p>");
+    // res.write("<p>Sistemas de Informação</p>");
+    // res.end();
 }
 
 function numerosAleatorios(req, res) {
@@ -42,6 +33,8 @@ function numerosAleatorios(req, res) {
         else
             nimpares.push(num);
     }
+
+    
 
     res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
     res.write("<h1>Listas Pares e Ímpares</h1>");
