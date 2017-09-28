@@ -7,13 +7,8 @@ function start(router, handlers){
     var urlParsed  = url.parse(req.url, true);
     router.route(urlParsed.pathname, handlers, req, res);
     
-    var pagina = rotear(urlParsed.pathname);
     console.log("roteando em: " + urlParsed.pathname);
-
-    fs.readFile(pagina, function(err, html){
-      res.writeHeader(200, {'Content-Type': 'text/html'});
-      res.end(html);
-    });
+    
   }).listen(3000);
   console.log("Servidor rodando em http://localhost:3000");
 }
@@ -21,14 +16,14 @@ function start(router, handlers){
 // Funçao simples de gerenciamento a rotas.
 var rotear = function (pathname) {
   if (pathname && pathname != "/") {
-    var arquivo = __dirname + "/paginas/" + pathname;
+    var arquivo = __dirname + "/content/html/" + pathname;
     var existe = fs.existsSync(arquivo);
     if (existe) {
       return arquivo;
     }
-    return __dirname + "/paginas/erro.html";
+    return __dirname + "/content/html/erro.html";
   }
-  return __dirname + "/paginas/index.html";
+  return __dirname + "/content/html/index.html";
 };
 
 module.exports.start = start;
