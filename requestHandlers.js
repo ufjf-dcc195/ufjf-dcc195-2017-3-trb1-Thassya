@@ -11,25 +11,22 @@ function naoEncontrado(req, res) {
 function helloLog(req, res) {
     res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
     res.write(folhaestilo());
-    res.write("<h1>Menu</h1>");
-    res.write("<ol>");
-    res.write("<li><a href='/sobre.html'>Sobre</a></li>");
-    res.write("<li><a href='/aleatorios.html'>Aleatórios</a></li>");
-    res.write("<li><a href='/primos.html?n1=1&n2=10'>Primos</a></li>");
-    res.write("<li><a href='/equacao.html'>Equação</a></li>");
-    res.write("<li><a href='/xadrez.html'>Xadrez</a></li>");
-    res.write("</ol>");
+    res.write(menu());
+    res.write("<h1>Index</h1>");
     res.end();
 }
 
 function wonderWoman(req, res) {
     res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
     res.write(folhaestilo());
+    res.write(menu());
+    res.write("<div id=conteudo>");
     res.write("<h1>Sobre Mim</h1>");
     res.write("<p>Thassya de Souza Abreu</p>");
     res.write("<p>200876005</p>");
     res.write("<p>thayowisky@gmail.com</p>");
     res.write("<p>Sistemas de Informação</p>");
+    res.write("</div>");
     res.end();
 }
 
@@ -45,34 +42,34 @@ function numerosAleatorios(req, res) {
             nimpares.push(num);
     }
 
-
-
     res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
     res.write(folhaestilo());
+    res.write(menu());
+    res.write("<div id=conteudo>");
     res.write("<h1>Listas Pares e Ímpares</h1>");
 
-    res.write("<table width=100%>");
-    res.write("<tr>");
-    res.write("<th> Pares </th>");
-    res.write("");
+    res.write("<h2>Pares</h2>");
+    res.write("<ul class=pares>");
     for (var i = 0; i < npares.length; i++) {
-        res.write("<td>" + npares[i] + "</td>");
+        res.write("<li>" + npares[i] + "</li>");
     }
-    res.write("</tr>");
+    res.write("</ul>");
 
-    res.write("<tr>");
-    res.write("<th>Ímpares</th>");
-    res.write("");
+    res.write("<h2>Ímpares</h2>");
+    res.write("<ul class=pares>");
     for (var i = 0; i < nimpares.length; i++) {
-        res.write("<td>" + nimpares[i] + "</td>");
+        res.write("<li>" + nimpares[i] + "</li>");
     }
-    res.write("</tr>");
-    res.write("</table>");
+    res.write("</ul>");
+    res.write("</div>");
     res.end();
 }
 
 function numerosPrimos(req, res) {
     res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+    res.write(folhaestilo());
+    res.write(menu());
+    res.write("<div id=conteudo>");
     res.write("<h1>Listas Números Primos</h1>");
 
     var endereco = req.url;
@@ -85,7 +82,7 @@ function numerosPrimos(req, res) {
         res.write("números inválidos");
     }
     else {
-        res.write("<ol>");
+        res.write("<ol class=primos>");
 
         var i = 0, div = 0, count = 0;
         for (i = n1; i <= n2; i++) {
@@ -99,13 +96,16 @@ function numerosPrimos(req, res) {
         }
         res.write("</ol>");
     }
+    res.write("</div>");
     res.end();
 }
 
 function equacaoSegundoGrau(req, res) {
     if (req.method == "GET") {
-        res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+        res.writeHead(200, { "Content-Type": "text/html; charset=utf-8;" });
         res.write(folhaestilo());
+        res.write(menu());
+        res.write("<div id=conteudo>");
         res.write("<h1>Termos da equação de segundo grau</h1>");
         res.write("<form method=post>");
         res.write("<label>Termo a: </label>");
@@ -116,6 +116,7 @@ function equacaoSegundoGrau(req, res) {
         res.write("<input type=text name=c /><br />");
         res.write("<input type=submit />");
         res.write("</form>");
+        res.write("</div>");
         res.end();
     }
     else {
@@ -129,23 +130,22 @@ function equacaoSegundoGrau(req, res) {
             var b = dados.b;
             var c = dados.c;
 
-            res.writeHead(200, { "Content-Type": "text/html;" });
+            res.writeHead(200, { "Content-Type": "text/html; charset=utf-8;" });
             res.write(folhaestilo());
+            res.write(menu());
+            res.write("<div id=conteudo>");
             res.write("<h1>Termos da equação de segundo grau</h1>");
-            res.write("<h2>Calculando (" + a + ")x² + (" + b + ")x + (" + c + ")</h2>");
-            if (a == null || b == null || c == null) {
-                res.write("Números ausentes");
+
+            console.log(a);
+            if (a == "" || b == "" || c == "") {
+                res.write("<h2>Números ausentes</h2>");
             }
             else {
-
+                res.write("<h2>Calculando (" + a + ")x² + (" + b + ")x + (" + c + ")</h2>");
                 var delta = Math.pow(b, 2) - 4 * a * c;
                 if (delta < 0) {
                     res.write("<h3> Não existem raizes reais! </h3>");
                 }
-                // else if (delta == 0) {
-                //     var res = -(b) / (2 * a);
-                //     res.write("<h3> As duas raizes são iguais e valem: " + res + "</h3>");
-                // }
                 else {
                     var raiz = Math.sqrt(delta);
                     var x1 = (-(b) - raiz) / (2 * a);
@@ -154,67 +154,161 @@ function equacaoSegundoGrau(req, res) {
                 }
 
             }
+            res.write("</div>");
 
             res.end();
-        })
+        });
     }
 }
 
 function tabuleiroXadrez(req, res) {
-    //cavalo: &#9816
+    if (req.method == "GET") {
+        res.writeHead(200, { "Content-Type": "text/html;charset=utf-8" });
+        res.write(folhaestilo());
+        res.write(menu());
+        res.write("<div id=conteudo>");
+        res.write("<h1>Tablueiro de Xadrez</h1>");
+        res.write(xadrez());
 
-    res.writeHead(200, { "Content-Type": "text/html;charset=utf-8" });
-    res.write(folhaestilo());
-    res.write("<h1>Tablueiro de Xadrez</h1>");
-    res.write(xadrez());
+        res.write("<div id=conteudo2>");
+        res.write("<form method=post>");
+        res.write("<label>Linha: </label>");
+        res.write("<input type=text name=linha /><br />");
+        res.write("<label>Coluna: </label>");
+        res.write("<input type=text name=coluna /><br />");
+        res.write("<input type=submit />");
+        res.write("</div>");
+        res.write("</div>");
+        res.end();
+    } else {
+        var body = "";
+        req.on("data", function (data) {
+            body += data;
+        });
+        req.on('end', function () {
+            var dados = qs.parse(body);
+            var linha = dados.linha;
+            var coluna = dados.coluna;
 
-    res.end();
+            res.writeHead(200, { "Content-Type": "text/html;charset=utf-8" });
+            res.write(folhaestilo());
+            res.write(menu());
+            res.write("<div id=conteudo>");
+            res.write("<h1>Tablueiro de Xadrez</h1>");
+            res.write(xadrez(linha, coluna));
 
-    var endereco = req.url;
-    var query = url.parse(endereco, true).query;
-    console.log(query);
-    if (!isEmptyObject(query)) {
-        var i = query.i;
-        var j = query.j;
-        console.log("i: " + i + ", j: " + j);
+
+            res.write("</div>");
+            res.end();
+        });
     }
-    res.end();
 }
 
-function xadrez() {
+function xadrezJson(req, res, next) {
+    if (req.method == "GET") {
+        res.writeHead(200, { "Content-Type": "text/html;charset=utf-8" });
+        res.write(folhaestilo());
+        res.write(menu());
+        res.write("<div id=conteudo>");
+        res.write("<h1>Tablueiro de Xadrez</h1>");
+        res.write(xadrez());
+
+        res.write("<div id=conteudo2>");
+        res.write("<form method=post>");
+        res.write("<label>Linha: </label>");
+        res.write("<input type=text name=linha /><br />");
+        res.write("<label>Coluna: </label>");
+        res.write("<input type=text name=coluna /><br />");
+        res.write("<input type=submit />");
+        res.write("</div>");
+        res.write("</div>");
+        res.end();
+    } else {
+        var body = '';
+        req.on('data', function (data) {
+            body += data;
+        });
+        req.on('end', function () {
+            var dados = qs.parse(body);
+            var linha = dados.linha;
+            var coluna = dados.coluna;
+
+            var json = {Cavalo: linha + "," + coluna }
+
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify(json));
+        });
+    }
+}
+
+
+function xadrez(l, c) {
+    //cavalo: &#9816
     var tabela = " ";
-
-    tabela += "<table>";
-
+    tabela += "<table id=xadrez>";
     for (var i = 0; i < 8; i++) {
-        tabela +=  "<tr>";
+        tabela += "<tr>";
         for (var j = 0; j < 8; j++) {
             if (i % 2 == j % 2) {
-                tabela += "<td id=" + i + "," + j + "></td>";
+                if (l == i && j == c) {
+                    tabela += "<td id=" + i + "," + j + ">&#9816</td>";
+                }
+                else {
+                    tabela += "<td id=" + i + "," + j + "></td>";
+                }
             }
             else {
-                tabela += "<td id=" + i + "," + j + "></td>";
+                if (l == i && j == c) {
+                    tabela += "<td id=" + i + "," + j + ">&#9816</td>";
+                }
+                else {
+                    tabela += "<td id=" + i + "," + j + "></td>";
+                }
             }
         }
         tabela += "</tr>";
     }
     tabela += "</table>";
-
     return tabela;
 }
 
-function folhaestilo(){
+function folhaestilo() {
     var estilo = "";
-    estilo += "<style>"; 
+    estilo += "<style>";
     estilo += "html {background-color: #fff;}";
-    estilo += "ol {margin: 20px;}"; 
-    estilo += "li {list-style-type: decimal-leading-zero;padding: 5px;}";
+    estilo += ".menu {list-style:none; float:left; }";
+    estilo += ".menu li {position:relative; float:left; border-right:1px solid #c0c0c0; }";
+    estilo += ".menu li a {color:#333; text-decoration:none; padding:5px 10px; display:block;}";
+    estilo += ".menu li a:hover{background:#333; color:#fff; -moz-box-shadow:0 3px 10px 0 #CCC; -webkit-box-shadow:0 3px 10px 0 #ccc; text-shadow:0px 0px 5px #fff;}";
+    estilo += "nav {padding: 20;} ";
     estilo += "td {font-size: 3em;height: 50px;width: 50px;}";
-    estilo += "table tr:nth-child(odd) td:nth-child(odd){background-color: #000;}";
-    estilo += "table tr:nth-child(even) td:nth-child(even){background-color: #000;}";
-
+    estilo += "table#xadrez tr:nth-child(odd) td:nth-child(odd){background-color: #000; color: #fff;}";
+    estilo += "table#xadrez tr:nth-child(even) td:nth-child(even){background-color: #000; color: #fff;}";
+    estilo += "#conteudo { padding-left: 50; width: 50%; }";
+    estilo += "#conteudo2 { width: 50%; }";
+    estilo += "ul.pares { margin-right: 40px; }";
+    estilo += "ul.pares li {list-style: none; padding:3px 5px;}";
+    estilo += "ul.pares:nth-child(odd){float:left;}";
+    estilo += "ol.primos li {list-style: none; padding:3px 5px;}";
+    estilo += "input[type=text] { width: 100%; padding: 12px 20px; margin: 8px 0;  display: inline-block;}";
+    estilo += "input[type=submit] {padding: 14px 20px;margin: 8px 0;border: none; cursor: pointer;}";
     estilo += "</style>";
     return estilo;
+}
+
+function menu() {
+    var menu = "";
+    // menu += "<h1>Menu</h1>";
+    menu += "<nav><ul class=menu>";
+    menu += "<li><a href='/sobre.html'>Sobre</a></li>";
+    menu += "<li><a href='/aleatorios.html'>Aleatórios</a></li>";
+    menu += "<li><a href='/primos.html?n1=1&n2=10'>Primos</a></li>";
+    menu += "<li><a href='/equacao.html'>Equação</a></li>";
+    menu += "<li><a href='/xadrez.html'>Xadrez</a></li>";
+    menu += "<li><a href='/xadrez.html'>Xadrez.Json</a></li>";
+    menu += "</ul></nav> <br/><br/>";
+
+    return menu;
 }
 function isEmptyObject(obj) {
     return !Object.keys(obj).length;
@@ -227,3 +321,4 @@ exports.aleatorios = numerosAleatorios;
 exports.primos = numerosPrimos;
 exports.equacao = equacaoSegundoGrau;
 exports.xadrez = tabuleiroXadrez;
+exports.xadrexJ = xadrezJson;
