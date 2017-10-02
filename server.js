@@ -2,6 +2,8 @@ var http = require("http");
 var url = require("url");
 var fs = require("fs");
 
+var port = process.env.PORT || 3000;
+
 function start(router, handlers){
   http.createServer(function (req, res){
     var urlParsed  = url.parse(req.url, true);
@@ -9,8 +11,9 @@ function start(router, handlers){
     
     console.log("roteando em: " + urlParsed.pathname);
     
-  }).listen(3000);
-  console.log("Servidor rodando em http://localhost:3000");
+  }).listen(port, function(){
+    console.log("Servidor rodando em http://localhost:3000");
+  });  
 }
 
 // Funçao simples de gerenciamento a rotas.
